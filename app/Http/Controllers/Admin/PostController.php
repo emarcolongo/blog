@@ -15,7 +15,7 @@ class PostController extends Controller
 
     public function show($id) {
         $post = Post::findOrFail($id);
-        dd($post);
+        return view('posts.edit',compact('post'));
     }
 
     public function create(){
@@ -40,6 +40,17 @@ class PostController extends Controller
         $data['user_id'] = 1;
         $data['is_active'] = true;
         dd(Post::create($data));
+    }
+
+    public function update($id, Request $request) {
+        $data = $request->all();
+        $post = Post::findOrFail($id);
+        dd($post->update($data));
+    }
+
+    public function destroy($id, Request $request) {
+        $post = Post::findOrFail($id);
+        dd($post->delete());
     }
 
 }
