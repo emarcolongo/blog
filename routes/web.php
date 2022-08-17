@@ -5,8 +5,6 @@ use App\Http\Controllers\HelloWorldController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\PostController;
 
-/* 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 */
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
