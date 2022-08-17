@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloWorldController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,5 @@ Route::get('/hello-world',[HelloWorldController::class,'index']);
 
 Route::prefix('admin')->group(function() {
     Route::resource('posts',PostController::class);
+    Route::resource('categories',CategoryController::class);
 });

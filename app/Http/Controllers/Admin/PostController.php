@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 Use App\Models\Post;
+Use App\Models\User;
 
 class PostController extends Controller
 {
     public function index() {
         $posts = Post::paginate(15);
-        dd($posts);
+        return view('posts.index',compact('posts'));
     }
 
     public function show($id) {
@@ -37,9 +38,10 @@ class PostController extends Controller
 
         /*Metodo: Mass Assignment */
         $data = $request->all();
-        $data['user_id'] = 1;
         $data['is_active'] = true;
-        dd(Post::create($data));
+        $user = User::find(1);
+        //dd(Post::create($data));
+        dd($user->posts()->create($data));
     }
 
     public function update($id, Request $request) {
