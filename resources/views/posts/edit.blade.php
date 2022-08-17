@@ -18,6 +18,19 @@
             <label for="slug">Slug</label>
             <input type="text" name="slug" id="slug" class="form-control" value="{{ $post->slug }}">
         </div>
+        <div class="form-group">
+            <label for="Category">Categorias</label>
+            <div class="row">
+                @foreach ($categories as $item)
+                    <div class="col-2 checkbox">
+                        <label>
+                            <input type="checkbox" name="categories[]" id="categories[]" value="{{ $item->id }}" @if ($post->categories->contains($item)) checked @endif >{{ $item->name }}
+                        </label>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
         <button class="btn btn-sm btn-success"><i class="fa-regular fa-circle-check"></i> Atualizar Postagem</button>
     </form>
     <hr>
