@@ -6,6 +6,7 @@ use App\Http\Controllers\HelloWorldController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,9 @@ Route::group(['middleware'=>['auth']], function() {
     Route::prefix('admin')->group(function() {
         Route::resource('posts',PostController::class);
         Route::resource('categories',CategoryController::class);
+        Route::prefix('profile')->group(function() {
+            Route::get('/',[ProfileController::class,'index']);
+            Route::post('/',[ProfileController::class,'update']);
+        });
     });
 });

@@ -49,7 +49,7 @@ class PostController extends Controller
          $data = $request->all();
          try {
              $data['is_active'] = true;
-             $user = User::find(1);
+             $user = auth()->user();
              $post = $user->posts()->create($data);
              $post->categories()->sync($data['categories']);
              flash('Postagem inserida com sucesso !!')->success();
