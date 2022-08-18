@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    <br>
     <div class="row">
         <div class="col-sm-12">
             <a href="{{ route('posts.create') }}" class="btn btn-sm btn-success float-right"><i class="fa-solid fa-circle-plus"></i> Criar Postagem</a>

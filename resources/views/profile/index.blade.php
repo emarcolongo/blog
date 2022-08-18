@@ -2,6 +2,7 @@
 @section('content')
     <form action="profile.update" method="post">
         @csrf
+        @method('put')
         <div class="form-group">
             <label>Nome</label>
             <input type="text" name="user[name]" id="user[name]" class="form-control" value="{{ $user->name }}">
