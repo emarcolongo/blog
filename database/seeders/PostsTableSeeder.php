@@ -23,6 +23,6 @@ class PostsTableSeeder extends Seeder
             'user_id'=>1
         ]);
         */
-        \App\Models\Post::factory()->count(50)->create();
+        \App\Models\Post::factory()->count(20)->create();
     }
 }

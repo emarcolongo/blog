@@ -20,6 +20,7 @@ class ProfileController extends Controller
     public function update(Request $request) {
         $userData = $request->get('user');
         $profileData = $request->get('profile');
+        dd($profileData);
 
         try {
             if ($userData['password']) {
@@ -31,6 +32,7 @@ class ProfileController extends Controller
             $user->update($userData);
             $user->profile()->update($profileData);
             flash('Perfil atualizado com Sucesso!')->success();
+            return redirect()->route('profile.index');
         } catch (\Exception $e) {
             $message = 'Erro ao atualizar dados do usuario';
             if(env('APP_DEBUG')) {

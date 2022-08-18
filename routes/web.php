@@ -31,9 +31,10 @@ Route::group(['middleware'=>['auth']], function() {
     Route::prefix('admin')->group(function() {
         Route::resource('posts',PostController::class);
         Route::resource('categories',CategoryController::class);
-        Route::prefix('profile')->group(function() {
-            Route::get('/',[ProfileController::class,'index']);
-            Route::post('/',[ProfileController::class,'update']);
+
+        Route::prefix('profile')->name('profile.')->group(function() {
+            Route::get('/',[ProfileController::class,'index'])->name('index');
+            Route::post('/',[ProfileController::class,'update'])->name('update');
         });
     });
 });

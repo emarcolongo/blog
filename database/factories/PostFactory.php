@@ -18,7 +18,7 @@ class PostFactory extends Factory
             'content'=>$this->faker->paragraphs(9,true),
             'slug'=>$this->faker->slug,
             'is_active'=>$this->faker->boolean,
-            'user_id'=>rand(1,10)
+            'user_id'=>10
         ];
     }
 }

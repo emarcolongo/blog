@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <form action="{{ route('profile.update') }}" method="post">
+    <form action="profile.update" method="post">
         @csrf
         <div class="form-group">
             <label>Nome</label>
@@ -20,18 +20,18 @@
         </div>
         <div class="form-group">
             <label>Facebook</label>
-            <input type="text" name="profile[facebook_link]" id="profile[facebook_link]" class="form-control" value="{{ $user->$profile->facebook_link }}">
+            <input type="text" name="profile[facebook_link]" id="profile[facebook_link]" class="form-control" value="{{ $user->profile->facebook_link }}">
         </div>
         <div class="form-group">
             <label>Instagram</label>
-            <input type="text" name="profile[instagram_link]" id="profile[instagram_link]" class="form-control" value="{{ $user->$profile->instagram_link }}">
+            <input type="text" name="profile[instagram_link]" id="profile[instagram_link]" class="form-control" value="{{ $user->profile->instagram_link }}">
         </div>
         <div class="form-group">
             <label>Site</label>
-            <input type="text" name="profile[site_link]" id="profile[site_link]" class="form-control" value="{{ $user->$profile->site_link }}">
+            <input type="text" name="profile[site_link]" id="profile[site_link]" class="form-control" value="{{ $user->profile->site_link }}">
         </div>        
         <div class="form-group">
             <button class="btn btn-sm btn-success"><i class="fa-solid fa-id-card-clip"></i> Atualizar Meu Perfil</button>
         </div>
-    </form>
+    </form>    
 @endsection
