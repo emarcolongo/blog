@@ -4,7 +4,10 @@
         @csrf
         <div class="form-group">
             <label for="Name">Nome</label>
-            <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
+            <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
+            @error('name')
+                <p class="invalid-feedback">{{ $message }}</p>
+            @enderror
         </div>
         <div class="form-group">
             <label for="Description">Descricao</label>

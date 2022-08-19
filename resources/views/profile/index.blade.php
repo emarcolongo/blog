@@ -1,15 +1,20 @@
 @extends('layouts.app')
 @section('content')
-    <form action="profile.update" method="post">
+    <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
         @csrf
-        @method('put')
         <div class="form-group">
             <label>Nome</label>
-            <input type="text" name="user[name]" id="user[name]" class="form-control" value="{{ $user->name }}">
+            <input type="text" name="user[name]" id="user[name]" class="form-control @error('user.name') is-invalid @enderror" value="{{ $user->name }}">
+            @error('user.name')
+                <p class="invalid-feedback">{{ $message }}</p>
+            @enderror
         </div>
         <div class="form-group">
             <label>E-Mail</label>
-            <input type="text" name="user[email]" id="user[email]" class="form-control" value="{{ $user->email }}">
+            <input type="text" name="user[email]" id="user[email]" class="form-control @error('user.email') is-invalid @enderror" value="{{ $user->email }}">
+            @error('user.email')
+                <p class="invalid-feedback">{{ $message }}</p>
+            @enderror
         </div>
         <div class="form-group">
             <label>Senha</label>
@@ -18,6 +23,13 @@
         <div class="form-group">
             <label>Sobre</label>
             <textarea name="profile[about]" id="" cols="30" rows="10" class="form-control">{{ $user->profile->about }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="Avatar">Avatar</label>
+            <input type="file" name="avatar" id="avatar" class="form-control @error('profile.avatar') is-invalid @enderror">
+            @error('profile.avatar')
+                <p class="invalid-feedback">{{ $message }}</p>
+            @enderror
         </div>
         <div class="form-group">
             <label>Facebook</label>

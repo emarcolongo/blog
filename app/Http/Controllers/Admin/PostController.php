@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 Use App\Models\Post;
 Use App\Models\User;
 Use App\Models\Category;
+Use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -26,28 +28,14 @@ class PostController extends Controller
         return view('posts.create',compact('categories'));
     }
 
-    public function store(Request $request) {
-        /*Metodo: Active Record
-        $data = $request->all();
-        $post = new Post();
-        $post->title = $data['title'];
-        $post->description = $data['description'];
-        $post->content = $data['content'];
-        $post->slug = $data['slug'];
-        $post->is_active = true;
-        $post->user_id = 1;
-        dd($post->save());
-        */
-
-        /*Metodo: Mass Assignment
-        $data = $request->all();
-        $data['is_active'] = true;
-        $user = User::find(1);
-        dd($user->posts()->create($data));
-         */
-
+    public function store(PostRequest $request) {
          $data = $request->all();
          try {
+             if ($request->hasFile('thumb')) {
+                $data['thumb'] = $request->file('thumb')->store('thumbs','public');
+             } else {
+                unset($data['thumb']);
+             }
              $data['is_active'] = true;
              $user = auth()->user();
              $post = $user->posts()->create($data);
@@ -69,9 +57,15 @@ class PostController extends Controller
         return view('posts.edit',compact('post','categories'));
     }
 
-    public function update(Post $post, Request $request) {
+    public function update(Post $post, PostRequest $request) {
         $data = $request->all();
         try {
+            if ($request->hasFile('thumb')) {
+                Storage::disk('public')->delete($post->thumb);
+                $data['thumb'] = $request->file('thumb')->store('thumbs','public');
+            } else {
+                unset($data['thumb']);
+            }
             $post->update($data);
             $post->categories()->sync($data['categories']);
             flash('Postagem atualizada com Sucesso!')->success();
