@@ -18,7 +18,12 @@
         </div>
         <div class="form-group">
             <label>Senha</label>
-            <input type="password" name="user[password]" id="user[password]" class="form-control" placeholder="Se deseja alterar sua senha, digite aqui a nova senha">
+            <input type="password" name="user[password]" id="user[password]" class="form-control @error('user.password') is-invalid @enderror" placeholder="Se deseja alterar sua senha, digite aqui a nova senha">
+            @error('user.password')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
         <div class="form-group">
             <label>Sobre</label>

@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 Use App\Models\User;
-Use App\Http\Requests\UserProfileRequest;
+Use App\Models\Post;
 
 
 class ProfileController extends Controller
@@ -24,6 +25,18 @@ class ProfileController extends Controller
         $profileData = $request->get('profile');
         try {
             if ($userData['password']) {
+                $validator = Validator::make(
+                    $request->all(),
+                    [
+                        'user.password' => ['min:8']
+                    ],
+                    [
+                        'min' => 'A senha devera ter pelo menos :min carateres!'
+                    ]
+                );
+                if ($validator->fails()) {
+                    return redirect()->back()->withErrors($validator);
+                }
                 $userData['password'] = bcrypt($userData['password']);
             } else {
                 unset($userData['password']);

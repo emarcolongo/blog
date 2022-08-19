@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Site\SiteHomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,13 +20,16 @@ use App\Http\Controllers\Admin\ProfileController;
 |
 */
 
-Route::get('/', function () { return view('welcome'); });
-
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::namespace('site')->name('site.')->group(function() {
+    Route::get('/', [SiteHomeController::class, 'index'])->name('index');
+    Route::get('/post/{slug}',[SiteHomeController::class,'single'])->name('single');
+});
 
-Route::get('/hello-world',[HelloWorldController::class,'index']);
+//Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+//Route::get('/hello-world',[HelloWorldController::class,'index']);
 
 Route::group(['middleware'=>['auth']], function() {
     Route::prefix('admin')->group(function() {
