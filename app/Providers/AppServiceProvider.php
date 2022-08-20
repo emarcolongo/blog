@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->share(['categories'=>\App\Models\Category::all('name','slug')]);
     }
 }

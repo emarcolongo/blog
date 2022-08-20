@@ -24,6 +24,6 @@ class SiteHomeController extends Controller
 
     public function single($slug) {
         $post = Post::whereSlug($slug)->first();
-        return view('site.posts.single',compact($post));
+        return view('site.posts.single',compact('post'));
     }
 }

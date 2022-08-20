@@ -12,13 +12,14 @@
                 @else
                     <img src="{{ asset('img/no-photo.jpg') }}" alt="" class="img-fluid" style="margin-bottom: 20px">
                 @endif
-                <p>{{ !! $post->content !! }}</p>
+                <p>{!! $post->content !!}</p>
             </div>
-            <div class="col-4">
-                <div class="col-12">
-                    <h2>Sidebar</h2>
-                    <hr>
-                </div>
+            @include('site.includes.comments')
+        </div>
+        <div class="col-4">
+            <div class="col-12">
+                <h2>Sidebar</h2>
+                <hr>
             </div>
         </div>
     </div>
