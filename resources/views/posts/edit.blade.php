@@ -41,7 +41,7 @@
                     <div class="col-2 custom-control custom-checkbox">
                         <label>
                             <input type="checkbox" name="categories[]" id="categories[]" class="custom-control-input @error('categories') is-invalid @enderror" value="{{ $item->id }}" @if ($post->categories->contains($item)) checked @endif >
-                            <label class="custom-control-label">{{ $item->name }}</label>
+                            <label class="custom-control-label" for="categories[]">{{ $item->name }}</label>
                         </label>
                     </div>
                 @endforeach
